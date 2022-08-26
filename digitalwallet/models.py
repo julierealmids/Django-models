@@ -19,7 +19,7 @@ class Customer(models.Model):
         return self.first_name
     
 class Currency(models.Model):
-    Symbol=models.CharField(max_length=10,blank=True)
+    symbol=models.CharField(max_length=10,blank=True)
     name=models.CharField(max_length=30,blank=True)
     country=models.CharField(max_length=15,blank=True)
     def __str__(self):
@@ -58,6 +58,10 @@ class Transaction(models.Model):
     third_party=models.ForeignKey(Third_Party,on_delete= models.CASCADE)
     datetime=models.DateTimeField()
     status=models.BooleanField()
+    customer=models.ForeignKey(Customer,on_delete= models.CASCADE)
+    charge=models.IntegerField()
+    destination=models.CharField(max_length=20,null=True)
+    transaction_code=models.CharField(max_length=5,blank=True)
     
 
 class Card(models.Model):
